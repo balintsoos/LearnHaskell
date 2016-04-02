@@ -1,0 +1,37 @@
+--fuggvenykompozicio
+---------------------
+reduce [] = []
+reduce l = map head (group l)
+--or
+reduce = map head . group
+----------------------
+uniq s = map head (group (sort s))
+--or
+uniq = reduce.sort
+---------------------
+repeated l = map head $filter (\a -> length a > 1) $group $ sort l
+--or
+repeated = map head . filter ((>1).length) . group . sort
+-----------------------
+sublists = filter ((>0).length) . concat . map tails . inits
+--or
+sublists = filter (not . null) . concat . map tails . inits
+-or
+sublists l = concat $ map (init . tails) $ inits l
+--------------------------
+subListWithLength h s = filter ((==h).length) (sublists s)
+--or
+subListWithLength h s = take (length s - h + 1) $ map (take h) $ tails s
+---------------------------
+until f g x = head $ filter f $ iterate g x
+------------------------
+--Hajtogatasok
+-------------------------
+--ez lesz a plusz minusz
+foldr :: (a -> b -> b) -> b -> [a] -> b
+-------------------------
+foldr _ e [] = e
+foldr f e (h:t) = f h $ foldr f e t
+------------------------
+foldl _ e [] = e
+foldl f e (h:t) = foldl f (f e h) t

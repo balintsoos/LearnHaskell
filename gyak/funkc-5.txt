@@ -1,0 +1,55 @@
+-- import Prelude hiding ((||), ...)
+
+False || False = False
+_ || _ = True
+-----------------------------
+xor a b | a==b = False
+xor _ _ = True
+--vagy
+xor True True = False
+xor False False = False
+xor _ _ = True
+----------------------------
+swap (a,b) = (b,a)
+---------------------------
+mirrorX (a,b) = (a,-b)
+-------------------------
+scale' x (a,b) = (a*x,b*x)
+------------------------
+mirrorP (x,y)(a,b) = (2*x-a, 2*y-b)
+---------------------------
+distance (x,y)(a,b) = sqrt ((x-a)^2 + (y-b)^2)
+-----------------------------
+mul3 x y = mod (x*y) 3 (ez fgv, ez nem mintaillesztés)
+--vagy
+mul3 _ 0 = 0
+mul3 0 _ = 0
+mul3 1 x = x
+mul3 x 1 = x
+mul3 2 2 = 1
+----------------------------
+replaceNewline '\n' = ' '
+replaceNewline x = x
+-------------------------
+replaceNewlines s = [replaceNewline c | c<-s]
+--vagy
+replaceNewlines s = [replaceNewline (s !! i) | i<-0..(length s)-1]
+-----------------------
+swap_a_az "a" = "az"
+swap_a_az "az" = "a"
+swap_a_az x = x
+---------------------
+swapAll_a_az s = unwords [swap_a_az w | w <- words s]
+----------------
+isSingleton [a] = True
+isSingleton _ = False
+------------------
+toUpperFirst (x:xs) = ((toUpper x):xs)
+------------------
+toUpperFirsts s = unwords [toUpperFirst w| w <- words s]
+--------------------
+countOfAs s = length[w | w <- words s, w=="a"]
+countOfAs s = sum[1 | "a" <-words s]
+---------------------
+
+

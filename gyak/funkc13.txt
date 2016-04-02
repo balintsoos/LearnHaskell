@@ -1,0 +1,5 @@
+--hajtogatasok
+---------------
+reverse = foldl (\a b -> b:a) []
+---------------
+

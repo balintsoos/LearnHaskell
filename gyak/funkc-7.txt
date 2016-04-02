@@ -1,0 +1,32 @@
+--Rekurzió
+---------------------------
+runs _ [] = []
+runs x y = take x y : runs x (drop x y)
+----------------------------
+slice [] _ = []
+slice x y = take (head x) y : slice (drop 1 x) (drop (head x) y)
+--------------------------
+every _ [] = []
+every x y = head y : every x (drop x y)
+--------------------------
+qsort [] = []
+qsort (h:t) = qsort[a|a<-t, a<h] ++[h]++ qsort[a|a<-t, a>=h]
+---------------------------
+upperLower c
+ | isUpper c = toLower c
+ | isLower c = toUpper c
+ | otherwise = c
+------------------------------
+digitToInt c
+ | isDigit c = (ord c)-(ord '0')
+ | elem c ['A'..'F'] = (ord c)-(ord 'A')+10
+ | elem c ['a'..'f'] = (ord c)-(ord 'a')+10
+ | otherwise = error "not a digit"
+-------------------------------
+sqr x = x^2
+--------------------------------
+(^) x 0 = 1
+(^) x n
+ | odd n = x * x^(n-1)
+ | otherwise = sqr x^(div n 2)
+-------------------------------

@@ -1,0 +1,22 @@
+--További függvények
+------------------
+on f conv = (\x y -> f (conv x) (conv y))
+--------------
+numbersInString s = filter (\a -> isDigit (head a)) $ groupBy (\x y -> isDigit x && isDigit y) s
+--or
+numbersInString s = filter (isDigit . head) $ groupBy (\x y -> isDigit x && isDigit y) s
+-----------------
+compressPairs p = map (\x -> (fst (head x),map snd x)) (groupBy ((==) `on` fst) p)
+--or
+compressPairs p = map (\x -> (fst (head x), snd (unzip x))) (groupBy ((==) `on` fst) p)
+--------------------
+maxDivisors = map (\x -> fst $ head x) $ groupBy ((==) `on` snd) $ zip [1..] (scanl1 max [length (divisors n) | n<-[1..]])
+--or
+maxDivisors = map (\x -> fst $ head x) $ groupBy ((==) `on` snd) $ zip [1..] $ scanl1 max $ map (length . divisors) [1..]
+--------------------
+longestWord s = maximumBy (compare `on` length) $ words s 
+---------------------
+mostFrequentChar s = head $ maximumBy (compare `on` length) $ group $ sort s
+------------------
+
+

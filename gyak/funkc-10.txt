@@ -1,0 +1,61 @@
+
+--magasabbrendu
+-----------------
+map _ [] = []
+map f (h:t) = f h : map f t
+------------------
+filter _ [] = []
+filter f (h:t)
+ | f h = h : filter f t
+ | otherwise = filter f t
+-----------------------
+count _ [] = 0
+count f (h:t)
+ | f h = 1 + count f t
+ | otherwise = count f t
+--or
+count f l = length(filter f l)
+-----------------------
+takeWhile _ [] = []
+takeWhile f (h:t)
+ | f h = h : takeWhile f t
+ | otherwise = []
+---------------------
+dropWhile _ [] = []
+dropWhile f (h:t)
+ | f h = dropWhile f t
+ | otherwise = h:t
+-------------------
+span f l = (takeWhile f l, dropWhile f l)
+--or
+span _ [] = ([],[])
+span f l@(x:xs)
+ | f x = (x:ys1, ys2)
+ | otherwise = ([],l)
+ where
+  (ys1,ys2) = span f xs
+------------------
+iterate f x = x : iterate f (f x)
+------------------
+($) f x = f x
+-----------------
+all _ [] = True
+all f (h:t)
+ | f h = True && all f t
+ | otherwise = False
+--or
+all _ [] = True
+all f (h:t) = f h && all f t
+--or
+all f x = length (filter f x) == length x
+--or
+all f x = length (dropWhile f x) == 0
+--or
+all f x = count f x == length x
+--or
+all f x = and $ map f x
+-----------------
+any f x = or $ map f x
+---------------
+elem e l = any (==e) l
+

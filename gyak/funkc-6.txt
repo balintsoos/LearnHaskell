@@ -1,0 +1,55 @@
+--Mintaillesztés
+---------------------
+countOfAs s = sum[1 | "a" <-words s]
+-----------------------
+distantPairs x = sum[1 | (a,b)<-x, abs(a-b)>=2]
+--------------------
+everyFifth x = [b | (a,b)<-zip [0..] x, a `mod` 5 ==0]
+--vagy
+everyFifth x = [b | (a,b)<-zip (cycle[0..4]) x, a==0]
+--vagy
+everyFifth x = [b | (0,b)<-zip (cycle[0..4]) x]
+-----------------
+--Rekurzió
+--------------------
+sum [] = 0
+sum (h:t) = h + sum t
+--------------------
+last [a] = a
+last (_:t) = last t
+----------------
+init [a] = []
+init (h:t) = h : init t
+---------------
+minimum [a] = a
+minimum (h:t) = min h (minimum t)
+-----------------
+concat [] = []
+concat [a] = a
+concat (h:t) = h ++ concat t
+------------------
+(++) [] x = x
+(++) [a] x = a:x
+(++) (x:xs) y = x:(xs++y)
+-------------------
+merge [] x = x
+merge x [] = x
+merge (x:xs) (y:ys) = x:y:merge xs ys
+--------------------
+merge [] x = x
+merge x [] = x
+merge (x:xs) (y:ys) = x:y:merge xs ys
+-----------------
+zip [] _ = []
+zip _ [] = []
+zip (x:xs) (y:ys) = (x,y) : zip xs ys
+-----------------------
+isPrefixOf [] _ = True
+isPrefixOf _ [] = False
+isPrefixOf (x:xs) (y:ys) = x==y && isPrefixOf xs ys
+-------------------------
+elem _ [] = False
+elem x (h:t) = x==h || elem x t
+-----------------------------
+nub [] = []
+nub (h:t) = h: nub [x | x<-t, x/=h]

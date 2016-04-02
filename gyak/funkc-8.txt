@@ -1,0 +1,44 @@
+--Rekúrzió
+----------------------
+tails [] = [[]]
+tails (x:xs) = (x:xs) : tails xs
+-----------------------
+--Esetszét
+---------------------
+toBin x
+ | x==0      = []
+ | even x    = 0 : toBin (div x 2)
+ | otherwise = 1 : toBin (div x 2)
+-------------------
+drop _ [] = []
+drop n (x:xs)
+ | n>0       = drop (n-1) xs
+ | otherwise = (x:xs)
+--------------------
+take _ [] = []
+take n (x:xs)
+ | n>0       = x : take (n-1) xs
+ | otherwise = []
+-----------------------
+insert n [] = [n]
+insert n (h:t)
+ | n > h     = h : insert n t
+ | otherwise = n : (h:t)
+---------------------
+sortMerge x [] = x
+sortMerge [] x = x
+sortMerge (h:t) (j:k)
+ |  h > j    = j : sortMerge (h:t) k
+ | otherwise = h : sortMerge t (j:k)
+------------------------
+unzip [] = ([],[])
+unzip ((a,b):xs) = (a:l1,b:l2) where
+ (l1,l2) = unzip xs
+------------------
+splitAt _ [] = ([],[])
+splitAt x (h:t)
+ | x<=0 = ([],h:t)
+ | otherwise = (h:l1,l2) where
+  (l1,l2) = splitAt (x-1) t
+--------------------------
+--|szorgalmi: IBAN|

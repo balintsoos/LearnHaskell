@@ -1,0 +1,48 @@
+--magasabbrend
+----------------------
+zipWith _ _ [] = []
+zipWith _ [] _ = []
+zipWith x (h:t) (j:k) = x h j : zipWith x t k
+---------------------
+zipWith _ _ [] = []
+zipWith _ [] _ = []
+zipWith f (x:xs) (y:ys) = f x y : zipWith f xs ys
+---------------------
+zipWith f (x:xs) (y:ys) = f x y : zipWith f xs ys
+zipWith _ _ _ = []
+-------------------------
+differences l = zipWith (-) (tail l) l
+----------------------
+fibPairs = iterate (\(a,b)->(b,a+b)) (0,1)
+---------------------
+group [] = []
+group l = xs : group ys
+ where (xs,ys) = span (== head l) l
+---------------------
+compress l = map (\a->(length a, head a)) $ group l
+----------------------
+
+--kompozicio
+-------------------------
+--lehet ez lesz a +/-
+(.) :: (b -> c) -> (a -> b) -> (a -> c)
+------------------------
+numbersMadeOfOnes = iterate ((+1).(*10)) 1
+--or
+numbersMadeOfOnes = iterate (\x->x*10+1) 1
+---------------------
+numbersMadeOfThrees = iterate (\x->x*10+3) 3
+-----------------------
+numbersMadeOfThreesAndOne = iterate ((+21).(*10)) 1
+----------------------
+dropSpaces = dropWhile isSpace
+--or
+dropSpaces str = dropWhile isSpace str
+---------------------
+trim = reverse.dropSpaces.reverse.dropSpaces
+--or
+trim str = reverse $ dropSpaces $ reverse $ dropSpaces str
+--------------------
+maximumOfMinimums = maximum . map minimum
+-----------------
+
